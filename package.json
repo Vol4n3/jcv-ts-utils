@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "jest ./src",
-    "check": "tsc --watch",
+    "check": "tsc --noEmit",
     "prettier": "prettier -w ."
   },
   "author": "Vol4n3",
