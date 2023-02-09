@@ -264,7 +264,6 @@ export class Scene2d {
       easingCallback(
         (n) => {
           this.forceUpdate = true;
-          console.log(this.easingFunctions, this.forceUpdate);
           onNext(n);
         },
         () => {

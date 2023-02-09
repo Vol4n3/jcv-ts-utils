@@ -5,13 +5,13 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "jest ./src",
-    "check": "tsc --noEmit",
+    "check": "tsc --watch",
     "prettier": "prettier -w ."
   },
   "author": "Vol4n3",
   "license": "ISC",
   "peerDependencies": {
-    "typescript": "> 4"
+    "typescript": ">=4"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",

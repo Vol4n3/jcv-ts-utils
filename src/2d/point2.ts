@@ -1,5 +1,5 @@
-import { NumberClamp, NumberRangeLoop } from "../unclassed";
-
+import { NumberUtils } from "../unclassed";
+const { clamp, rangeLoop } = NumberUtils;
 export type Point2 = [number, number];
 
 export interface Position2 {
@@ -63,7 +63,7 @@ export function PointClamp(
   [xMin, yMin]: Point2,
   [xMax, yMax]: Point2
 ): Point2 {
-  return [NumberClamp(xMin, x, xMax), NumberClamp(yMin, y, yMax)];
+  return [clamp(xMin, x, xMax), clamp(yMin, y, yMax)];
 }
 
 export function PointBoundaryLoop(
@@ -71,7 +71,7 @@ export function PointBoundaryLoop(
   [xMin, yMin]: Point2,
   [xMax, yMax]: Point2
 ): Point2 {
-  return [NumberRangeLoop(xMin, x, xMax), NumberRangeLoop(yMin, y, yMax)];
+  return [rangeLoop(xMin, x, xMax), rangeLoop(yMin, y, yMax)];
 }
 
 export function PointsSum(points: Point2[]): Point2 {

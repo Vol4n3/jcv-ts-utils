@@ -206,7 +206,7 @@ const decreaseHeight: (maxHeight: string) => Keyframe[] = (
     },
   ];
 };
-export const KeyframesHelper = {
+export const KeyframesUtils = {
   fadeIn,
   fadeOut,
   slideInFromRight,
