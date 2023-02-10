@@ -1,13 +1,11 @@
-type Pos2 = {
-  x: number;
-  y: number;
-};
+import { Point } from "./point";
+import Point2 = Point.Point2;
 
-interface GridPosition extends Pos2 {
+interface GridPosition extends Point2 {
   weight?: number;
 }
 
-class GridNode implements Pos2 {
+class GridNode implements GridPosition {
   parent: GridNode | null = null;
   score: number = 0;
   g: number = 0;
@@ -197,12 +195,12 @@ export function SearchAStar(
 }
 
 const heuristics = {
-  manhattan: function (pos0: Pos2, pos1: Pos2): number {
+  manhattan: function (pos0: Point2, pos1: Point2): number {
     const d1 = Math.abs(pos1.x - pos0.x);
     const d2 = Math.abs(pos1.y - pos0.y);
     return d1 + d2;
   },
-  diagonal: function (pos0: Pos2, pos1: Pos2): number {
+  diagonal: function (pos0: Point2, pos1: Point2): number {
     const D = 1;
     const D2 = Math.sqrt(2);
     const d1 = Math.abs(pos1.x - pos0.x);
@@ -211,7 +209,7 @@ const heuristics = {
   },
 };
 
-function getNode<T extends Pos2>(
+function getNode<T extends Point2>(
   grid: T[],
   x: number,
   y: number
@@ -219,7 +217,7 @@ function getNode<T extends Pos2>(
   return grid.find((f) => f.x === x && f.y === y);
 }
 
-function getNeighbors<T extends Pos2>(
+function getNeighbors<T extends Point2>(
   nodes: T[],
   { x, y }: T,
   diagonal?: boolean

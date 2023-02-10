@@ -1,4 +1,6 @@
 // from https://github.com/jackunion/tooloud
+import { NumberUtils } from "../commons";
+
 const PERMUTATION = [
   151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140,
   36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234,
@@ -22,7 +24,7 @@ const P = [...PERMUTATION, ...PERMUTATION];
 
 export class Perlin {
   constructor(seed = Math.floor(Math.random() * 10000)) {
-    this._seedValue = Perlin.xorshift(seed);
+    this._seedValue = NumberUtils.xorshift(seed);
 
     this.noise = this.noise.bind(this);
     this.setSeed = this.setSeed.bind(this);
@@ -39,17 +41,6 @@ export class Perlin {
       u = h < 8 ? x : y,
       v = h < 4 ? y : h === 12 || h === 14 ? x : z;
     return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
-  }
-
-  static lerp(t: number, a: number, b: number): number {
-    return a + t * (b - a);
-  }
-
-  static xorshift(value: number): number {
-    let x = value ^ (value >> 12);
-    x = x ^ (x << 25);
-    x = x ^ (x >> 27);
-    return x * 2;
   }
 
   noise(a: number, b: number, c: number = 0): number {
@@ -76,29 +67,29 @@ export class Perlin {
       BA = P[B] + Z,
       BB = P[B + 1] + Z;
 
-    return Perlin.lerp(
+    return NumberUtils.lerp(
       w,
-      Perlin.lerp(
+      NumberUtils.lerp(
         v,
-        Perlin.lerp(
+        NumberUtils.lerp(
           u,
           Perlin.grad(P[AA], x, y, z),
           Perlin.grad(P[BA], x - 1, y, z)
         ),
-        Perlin.lerp(
+        NumberUtils.lerp(
           u,
           Perlin.grad(P[AB], x, y - 1, z),
           Perlin.grad(P[BB], x - 1, y - 1, z)
         )
       ),
-      Perlin.lerp(
+      NumberUtils.lerp(
         v,
-        Perlin.lerp(
+        NumberUtils.lerp(
           u,
           Perlin.grad(P[AA + 1], x, y, z - 1),
           Perlin.grad(P[BA + 1], x - 1, y, z - 1)
         ),
-        Perlin.lerp(
+        NumberUtils.lerp(
           u,
           Perlin.grad(P[AB + 1], x, y - 1, z - 1),
           Perlin.grad(P[BB + 1], x - 1, y - 1, z - 1)
@@ -108,6 +99,6 @@ export class Perlin {
   }
 
   setSeed(seed = 3000): void {
-    this._seedValue = Perlin.xorshift(seed);
+    this._seedValue = NumberUtils.xorshift(seed);
   }
 }

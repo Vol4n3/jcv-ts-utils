@@ -1,4 +1,4 @@
-import { NumberUtils } from "./number.utils";
+import { NumberUtils } from "./number-utils";
 const { PI } = NumberUtils;
 export type EasingCallback = (
   onValue: (value: number, easeIndex: number) => void,

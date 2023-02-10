@@ -1,14 +1,5 @@
-import { NumberUtils } from "./number.utils";
-const { coordinateRatioToScreen, clamp, rangeLoop } = NumberUtils;
-test("should transform coordinate to screen pixel", function () {
-  expect(coordinateRatioToScreen(0, 0, 0, 0)).toEqual({ x: 0, y: 0 });
-  expect(coordinateRatioToScreen(0, 0, 1200, 600)).toEqual({ x: 0, y: 0 });
-  expect(coordinateRatioToScreen(1, 1, 1200, 600)).toEqual({ x: 1200, y: 600 });
-  expect(coordinateRatioToScreen(0.5, 0.5, 1200, 600)).toEqual({
-    x: 600,
-    y: 300,
-  });
-});
+import { NumberUtils } from "./number-utils";
+const { clamp, rangeLoop } = NumberUtils;
 
 test("should clamp number", () => {
   expect(clamp(5, 25, 100)).toEqual(25);

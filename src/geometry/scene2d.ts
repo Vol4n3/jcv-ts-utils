@@ -5,10 +5,9 @@ import {
   EasingCallback,
   EasingFunction,
   loadImage,
-} from "../unclassed";
-import { RequireAtLeastOne } from "../types";
+  RequireAtLeastOne,
+} from "../commons";
 import { Camera2 } from "./camera2";
-import { Position2 } from "./point2";
 
 type SceneCallBack = (scene: Scene2d, time: number) => void;
 type addEasingProps = {
@@ -19,7 +18,7 @@ type addEasingProps = {
   easing?: EasingFunction;
 };
 
-export interface Item2Scene extends Position2 {
+export interface Item2Scene {
   isUpdated: boolean;
   onResize?: (canvasWidth: number, canvasHeight: number) => void;
   scenePriority: number;
