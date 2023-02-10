@@ -59,8 +59,8 @@ export class Scene2d {
   private now: number = 0;
   private then: number = 0;
   private tickAnimation: number = 0;
-  private resizeObs = new ResizeObserver(this.debouncedResize.bind(this));
-  private debounce = CreateDebounce(this.resize.bind(this), 300);
+  private resizeObs;
+  private debounce;
   private easingFunctions: {
     easingCallback: EasingCallback;
     onNext: (value: number) => void;
@@ -81,6 +81,8 @@ export class Scene2d {
     this.ctx.imageSmoothingEnabled = false;
 
     container.appendChild(this.canvas);
+    this.resizeObs = new ResizeObserver(this.debouncedResize.bind(this));
+    this.debounce = CreateDebounce(this.resize.bind(this), 300);
     this.resizeObs.observe(this.container);
     this.camera = new Camera2();
     this.resize();
