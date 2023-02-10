@@ -11,9 +11,9 @@ import { Camera2 } from "./camera2";
 
 type SceneCallBack = (scene: Scene2d, time: number) => void;
 type addEasingProps = {
-  startValue: number;
-  endValue: number;
-  onNext: EasingFunction;
+  start: number;
+  scale: number;
+  onNext: (value: number) => void;
   time?: number;
   easing?: EasingFunction;
 };
@@ -63,7 +63,7 @@ export class Scene2d {
   private debounce = CreateDebounce(this.resize.bind(this), 300);
   private easingFunctions: {
     easingCallback: EasingCallback;
-    onNext: EasingFunction;
+    onNext: (value: number) => void;
     onEnd: () => void;
   }[] = [];
   private updateListeners: SceneCallBack[] = [];
@@ -182,22 +182,20 @@ export class Scene2d {
   async addEasing({
     easing = Easing.easeOutCubic,
     time = 20,
-    startValue,
-    endValue,
+    start,
+    scale,
     onNext,
   }: addEasingProps): Promise<void> {
     return new Promise((resolve) => {
       this.forceUpdate = true;
 
       this.easingFunctions.push({
-        easingCallback: createEasing([
-          {
-            easing,
-            startValue,
-            endValue,
-            time,
-          },
-        ]),
+        easingCallback: createEasing({
+          easing,
+          start,
+          scale,
+          time,
+        }),
         onNext,
         onEnd: () => {
           resolve();

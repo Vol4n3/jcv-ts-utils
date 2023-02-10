@@ -1,34 +1,31 @@
 import { NumberUtils } from "./number-utils";
+
 const { PI } = NumberUtils;
 export type EasingCallback = (
-  onValue: (value: number, easeIndex: number) => void,
+  onValue: (value: number) => void,
   onFinish: () => void
 ) => void;
 export type EasingFunction = (n: number) => number;
 export type EasingOption = {
   easing: EasingFunction;
-  startValue: number;
-  endValue: number;
+  start: number;
+  scale: number;
   time: number;
 };
-export const createEasing = (steps: EasingOption[]): EasingCallback => {
-  let current = 0;
-  let index = 0;
-  const cb: EasingCallback = (onValue, onFinish) => {
-    const option = steps[index];
-    if (!option) {
+export const createEasing = ({
+  easing,
+  time,
+  start,
+  scale,
+}: EasingOption): EasingCallback => {
+  let currentTime = 0;
+  return (onValue, onFinish) => {
+    const ratio = ++currentTime / time;
+    if (currentTime > time) {
       return onFinish();
     }
-    const { easing, time, startValue, endValue } = option;
-    const ratio = current++ / time;
-    if (ratio > 1) {
-      index++;
-      current = 0;
-      return cb(onValue, onFinish);
-    }
-    return onValue(startValue + easing(ratio) * (endValue - startValue), index);
+    return onValue(start + easing(ratio) * scale);
   };
-  return cb;
 };
 const c4 = (2 * PI) / 3;
 const c5 = (2 * PI) / 4.5;
@@ -48,6 +45,11 @@ function bounceOut(x: number) {
 }
 
 export const Easing = {
+  easeShake(amount: number, inverse?: boolean): EasingFunction {
+    return function (t: number) {
+      return Math.sin(t * amount * PI) * (inverse ? -1 : 1);
+    };
+  },
   linear: (t: number) => t,
   easeInQuad: (t: number) => t * t,
   easeOutQuad: (t: number) => t * (2 - t),

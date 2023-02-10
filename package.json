@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest ./src",
     "check": "tsc --watch",
-    "prettier": "prettier -w ."
+    "prettier": "prettier -w .",
+    "preversion": "tsc"
   },
   "author": "Vol4n3",
   "license": "ISC",
