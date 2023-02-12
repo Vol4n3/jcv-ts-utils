@@ -1,4 +1,8 @@
-all my utils typescript function
+# Utilities typescript functions
+here all my utils typescript functions
 
-# todo 
+## install
+`npm install --save jcv-ts-utils`
+## todo 
 write unit test for all function
+
