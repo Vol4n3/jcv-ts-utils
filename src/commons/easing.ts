@@ -50,6 +50,16 @@ export const Easing = {
       return Math.sin(t * amount * PI) * (inverse ? -1 : 1);
     };
   },
+  easeShakeIn(amount: number, inverse?: boolean): EasingFunction {
+    return function (t: number) {
+      return Math.sin(t * t * amount * PI) * (inverse ? -1 : 1);
+    };
+  },
+  easeShakeOut(amount: number, inverse?: boolean): EasingFunction {
+    return function (t: number) {
+      return Math.sin(Math.sqrt(t) * amount * PI) * (inverse ? -1 : 1);
+    };
+  },
   linear: (t: number) => t,
   easeInQuad: (t: number) => t * t,
   easeOutQuad: (t: number) => t * (2 - t),
