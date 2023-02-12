@@ -225,7 +225,7 @@ export class Scene2d {
     });
   }
 
-  writeText(config: canvasWriteTextConfig) {
+  writeText(config: canvasWriteTextConfig): TextMetrics[] {
     this.ctx.save();
     let text = config.text;
     if (config.textAlign) this.ctx.textAlign = config.textAlign;
@@ -242,7 +242,9 @@ export class Scene2d {
       text = text.replace(" ", "\n");
     }
     const lines = text.split("\n");
+    const measures: TextMetrics[] = [];
     lines.forEach((l, i) => {
+      measures.push(this.ctx.measureText(l));
       const lineHeight = config.lineHeight || config.font?.size || 26;
       const h = config.y + lineHeight * i;
       if (config.fillStyle) {
@@ -254,8 +256,8 @@ export class Scene2d {
         this.ctx.strokeText(l, config.x, h);
       }
     });
-
     this.ctx.restore();
+    return measures;
   }
 
   private applyEasing() {
