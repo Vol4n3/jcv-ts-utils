@@ -65,15 +65,15 @@ export module NumberUtils {
    *
    * @param point nombre de point qui seront converties en valeur
    * @param scalePoint échelle de grandeur de points à avoir pour atteindre le cap maximum
-   * @param capMax
+   * @param maxVal
    * @param minVal minimum value
    */
   export const scaleHyperTangent = (
     point: number,
     scalePoint: number,
-    capMax: number,
+    maxVal: number,
     minVal: number = 0
-  ): number => Math.tanh(((point + minVal) / scalePoint) * capMax);
+  ): number => Math.tanh(point / scalePoint) * (maxVal - minVal) + minVal;
   export const randomRange = (max: number, min?: number): number => {
     if (typeof min !== "undefined") {
       if (min > max) {
