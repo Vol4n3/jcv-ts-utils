@@ -1,1 +1,4 @@
-WIP don't use this project
+all my utils typescript function
+
+# todo 
+write unit test for all function
