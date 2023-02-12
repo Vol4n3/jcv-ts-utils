@@ -4,6 +4,7 @@
   "description": "Export de l'ensemble de mes fonctions typescript utilitaires",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": "https://github.com/Vol4n3/jcv-ts-utils",
   "scripts": {
     "test": "jest ./src",
     "check": "tsc --watch",
