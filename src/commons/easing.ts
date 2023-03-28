@@ -50,11 +50,23 @@ export const Easing = {
       return Math.sin(t * amount * PI) * (inverse ? -1 : 1);
     };
   },
+  /**
+   * Amount of wave
+   * Inverse wave starting
+   * @param amount
+   * @param inverse
+   */
   easeShakeIn(amount: number, inverse?: boolean): EasingFunction {
     return function (t: number) {
       return Math.sin(t * t * amount * PI) * (inverse ? -1 : 1);
     };
   },
+  /**
+   * Amount of wave
+   * @param amount
+   * Inverse wave starting
+   * @param inverse
+   */
   easeShakeOut(amount: number, inverse?: boolean): EasingFunction {
     return function (t: number) {
       return Math.sin(Math.sqrt(t) * amount * PI) * (inverse ? -1 : 1);
