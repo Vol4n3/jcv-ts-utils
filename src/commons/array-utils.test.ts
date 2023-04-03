@@ -153,3 +153,40 @@ describe("removeIdentical", () => {
     expect(result).toEqual(expectedResult);
   });
 });
+
+describe("rangeArray", () => {
+  test("should return an reverse array when the length is negative", () => {
+    const start = 5;
+    const end = 3;
+    const result = ArrayUtils.range(start, end);
+    expect(result).toEqual([5, 4, 3]);
+  });
+
+  test("should return an array with too element if length = 1", () => {
+    const start = 4;
+    const end = 5;
+    const result = ArrayUtils.range(start, end);
+    expect(result).toEqual([4, 5]);
+  });
+
+  test("should return a range array with the correct length and values", () => {
+    const start = 3;
+    const end = 7;
+    const result = ArrayUtils.range(start, end);
+    expect(result).toEqual([3, 4, 5, 6, 7]);
+  });
+
+  test("should return an empty array when the start and end values are equal", () => {
+    const start = 5;
+    const end = 5;
+    const result = ArrayUtils.range(start, end);
+    expect(result).toEqual([5]);
+  });
+
+  test("should handle the edge case when start is 0", () => {
+    const start = 0;
+    const end = 3;
+    const result = ArrayUtils.range(start, end);
+    expect(result).toEqual([0, 1, 2, 3]);
+  });
+});

@@ -36,4 +36,11 @@ export module ArrayUtils {
     copy.splice(to, 0, copy.splice(from, 1)[0]);
     return copy;
   }
+
+  export function range(start: number, end: number): number[] {
+    const length = Math.abs(end - start) + 1;
+    const step = end >= start ? 1 : -1;
+
+    return Array.from({ length }, (_, i) => start + i * step);
+  }
 }
