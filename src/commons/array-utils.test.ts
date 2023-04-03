@@ -190,3 +190,63 @@ describe("rangeArray", () => {
     expect(result).toEqual([0, 1, 2, 3]);
   });
 });
+
+describe("translateItems", () => {
+  test("should return the same array when to is negative", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const from = 1;
+    const to = -1;
+    const result = ArrayUtils.translateItems(arr, from, to);
+    expect(result).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  test("should move an element to the correct position", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const from = 2;
+    const to = 4;
+    const result = ArrayUtils.translateItems(arr, from, to);
+    expect(result).toEqual([1, 2, 4, 5, 3]);
+  });
+
+  test("should move an element to the beginning of the array", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const from = 3;
+    const to = 0;
+    const result = ArrayUtils.translateItems(arr, from, to);
+    expect(result).toEqual([4, 1, 2, 3, 5]);
+  });
+
+  test("should move an element to the end of the array", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const from = 1;
+    const to = 4;
+    const result = ArrayUtils.translateItems(arr, from, to);
+    expect(result).toEqual([1, 3, 4, 5, 2]);
+  });
+
+  test("should handle the edge case when from and to are the same", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const from = 2;
+    const to = 2;
+    const result = ArrayUtils.translateItems(arr, from, to);
+    expect(result).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  test("should handle an array of custom objects", () => {
+    const arr = [
+      { id: 1, value: "one" },
+      { id: 2, value: "two" },
+      { id: 3, value: "three" },
+      { id: 4, value: "four" },
+    ];
+    const from = 1;
+    const to = 3;
+    const result = ArrayUtils.translateItems(arr, from, to);
+    expect(result).toEqual([
+      { id: 1, value: "one" },
+      { id: 3, value: "three" },
+      { id: 4, value: "four" },
+      { id: 2, value: "two" },
+    ]);
+  });
+});
