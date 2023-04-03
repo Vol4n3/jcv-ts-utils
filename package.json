@@ -10,7 +10,8 @@
     "coverage": "jest ./src --coverage",
     "check": "tsc --watch",
     "prettier": "prettier -w .",
-    "preversion": "rimraf -rf ./dist && tsc"
+    "preversion": "rimraf -rf ./dist && tsc",
+    "postversion": "npm publish"
   },
   "author": "Vol4n3",
   "license": "ISC",
