@@ -1,11 +1,9 @@
 import { NumberUtils } from "../commons";
-import OperationName = NumberUtils.OperationName;
-import rangeLoop = NumberUtils.rangeLoop;
 
 export module Point {
   export type Point2 = { x: number; y: number };
 
-  export const samePosition = (
+  export const equal = (
     { x: p1x, y: p1y }: Point2,
     { x: p2x, y: p2y }: Point2
   ): boolean => {
@@ -80,47 +78,48 @@ export module Point {
     { x: xMin, y: yMin }: Point2,
     { x: xMax, y: yMax }: Point2
   ): Point2 {
-    return { x: rangeLoop(xMin, x, xMax), y: rangeLoop(yMin, y, yMax) };
+    return {
+      x: NumberUtils.rangeLoop(xMin, x, xMax),
+      y: NumberUtils.rangeLoop(yMin, y, yMax),
+    };
   }
 
   export function sum(points: Point2[]): Point2 {
     return points.reduce(
-      ({ x: prevX, y: prevY }, { x: currentX, y: currentY }) => ({
-        x: prevX + currentX,
-        y: prevY + currentY,
-      }),
+      (prev, curr) => operation(prev, curr, (a, b) => a + b),
       { x: 0, y: 0 }
     );
   }
-
-  export function operation(
-    type: OperationName,
-    { x: aX, y: aY }: Point2,
-    b: number | Point2
+  export function operation<T>(
+    a: Point2,
+    b: number | Point2,
+    method: (a: number, b: number) => number
   ): Point2 {
     if (typeof b === "number") {
       return {
-        x: NumberUtils.operation(type, aX, b),
-        y: NumberUtils.operation(type, aY, b),
+        x: method(a.x, b),
+        y: method(a.y, b),
       };
     }
-    const { x: bX, y: bY } = b;
     return {
-      x: NumberUtils.operation(type, aX, bX),
-      y: NumberUtils.operation(type, aY, bY),
+      x: method(a.x, b.x),
+      y: method(a.y, b.y),
     };
   }
-
   export function average(points: Point2[]): Point2 {
-    return operation("divide", sum(points), points.length);
+    return operation(sum(points), points.length, (a, b) => a / b);
   }
 
-  export function destination(
-    { x: x, y: y }: Point2,
+  export function translateByVector(
+    point: Point2,
     angle: number,
     length: number
   ): Point2 {
-    return { x: x + Math.cos(angle) * length, y: y + Math.sin(angle) * length };
+    return operation(
+      point,
+      { x: Math.cos(angle) * length, y: Math.sin(angle) * length },
+      (a, b) => a + b
+    );
   }
 
   export function coordinateRatioToScreen(
@@ -128,7 +127,7 @@ export module Point {
     y: number,
     width: number,
     height: number
-  ): { x: number; y: number } {
+  ): Point2 {
     return {
       x: Math.round(width * x),
       y: Math.round(height * y),

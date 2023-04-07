@@ -128,28 +128,28 @@ describe("removeIdentical", () => {
   test("removes duplicate elements from the array", () => {
     const array = [1, 2, 3, 2, 1, 4, 5, 4];
     const expectedResult = [1, 2, 3, 4, 5];
-    const result = ArrayUtils.removeIdentical(array);
+    const result = ArrayUtils.removeDuplicated(array);
     expect(result).toEqual(expectedResult);
   });
 
   test("does not modify the original array", () => {
     const array = [1, 2, 3, 2, 1, 4, 5, 4];
     const originalArrayCopy = Array.from(array);
-    ArrayUtils.removeIdentical(array);
+    ArrayUtils.removeDuplicated(array);
     expect(array).toEqual(originalArrayCopy);
   });
 
   test("returns an empty array when the input is an empty array", () => {
     const array: number[] = [];
     const expectedResult: number[] = [];
-    const result = ArrayUtils.removeIdentical(array);
+    const result = ArrayUtils.removeDuplicated(array);
     expect(result).toEqual(expectedResult);
   });
 
   test("returns the same array when there are no duplicates", () => {
     const array = [1, 2, 3, 4, 5];
     const expectedResult = Array.from(array);
-    const result = ArrayUtils.removeIdentical(array);
+    const result = ArrayUtils.removeDuplicated(array);
     expect(result).toEqual(expectedResult);
   });
 });
@@ -248,5 +248,52 @@ describe("translateItems", () => {
       { id: 4, value: "four" },
       { id: 2, value: "two" },
     ]);
+  });
+});
+
+describe("array operation", () => {
+  test("should perform the provided operation on two arrays of equal length", () => {
+    const a = [1, 2, 3, 4];
+    const b = [2, 3, 4, 5];
+    const add = (a: number, b: number) => a + b;
+    const result = ArrayUtils.operation(a, b, add);
+    expect(result).toEqual([3, 5, 7, 9]);
+  });
+
+  test("should perform the provided operation on two arrays of different lengths", () => {
+    const a = [1, 2, 3, 4];
+    const b = [2, 3];
+    const add = (a: number, b: number) => a + b;
+    const result = ArrayUtils.operation(a, b, add);
+    expect(result).toEqual([3, 5, 3, 4]);
+  });
+
+  test("should perform the provided operation on two arrays when b is longer than a", () => {
+    const a = [1, 2];
+    const b = [2, 3, 4, 5];
+    const add = (a: number, b: number) => a + b;
+    const result = ArrayUtils.operation(a, b, add);
+    expect(result).toEqual([3, 5, 4, 5]);
+  });
+  test("should handle an empty array", () => {
+    const a: number[] = [];
+    const b = [2, 3, 4, 5];
+    const add = (a: number, b: number) => a + b;
+    const result = ArrayUtils.operation(a, b, add);
+    expect(result).toEqual([2, 3, 4, 5]);
+  });
+  test("should perform the provided operation on an array and a single value", () => {
+    const a = [1, 2, 3, 4];
+    const b = 2;
+    const add = (a: number, b: number) => a + b;
+    const result = ArrayUtils.operation(a, b, add);
+    expect(result).toEqual([3, 4, 5, 6]);
+  });
+  test("should perform the provided operation on an empty array and a single value", () => {
+    const a: number[] = [];
+    const b = 2;
+    const add = (a: number, b: number) => a + b;
+    const result = ArrayUtils.operation(a, b, add);
+    expect(result).toEqual([]);
   });
 });

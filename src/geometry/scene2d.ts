@@ -1,5 +1,5 @@
 import {
-  CreateDebounce,
+  createDebounce,
   createEasing,
   Easing,
   EasingCallback,
@@ -82,7 +82,7 @@ export class Scene2d {
 
     container.appendChild(this.canvas);
     this.resizeObs = new ResizeObserver(this.debouncedResize.bind(this));
-    this.debounce = CreateDebounce(this.resize.bind(this), 300);
+    this.debounce = createDebounce(this.resize.bind(this), 300);
     this.resizeObs.observe(this.container);
     this.camera = new Camera2();
     this.resize();

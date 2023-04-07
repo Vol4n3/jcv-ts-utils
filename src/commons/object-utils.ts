@@ -1,4 +1,4 @@
-export module objectUtils {
+export module ObjectUtils {
   export const updateItem = <T, U extends keyof T>(
     current: T,
     key: U,

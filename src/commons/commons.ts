@@ -9,15 +9,14 @@ export function notInitializedFn() {
 export async function notInitializedPromise() {
   throw new Error("Not initialized function");
 }
-
 /**
  * Instancie un debounce qui permet de se faire rappeler à la fin du timeout
- * si un autre call c'est exécuté alors le timeout est réinitialisé
- * et la fonction précédente sera annulé
+ * si un autre call s'est exécuté alors le timeout est réinitialisé
+ * et la fonction précédente sera annulée
  * @param handler
  * @param time
  */
-export const CreateDebounce = <T extends (...args: any) => void>(
+export const createDebounce = <T extends (...args: any) => void>(
   handler: T,
   time: number
 ): { call: (...args: Parameters<T>) => void; abort: () => void } => {

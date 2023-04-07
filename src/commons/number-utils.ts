@@ -1,28 +1,4 @@
 export module NumberUtils {
-  export type OperationName =
-    | "multiply"
-    | "subtract"
-    | "add"
-    | "divide"
-    | "pow";
-  export const operation = (
-    type: OperationName,
-    a: number,
-    b: number
-  ): number => {
-    switch (type) {
-      case "add":
-        return a + b;
-      case "divide":
-        return a / b;
-      case "multiply":
-        return a * b;
-      case "subtract":
-        return a - b;
-      case "pow":
-        return Math.pow(a, b);
-    }
-  };
   export function xorshift(value: number): number {
     let x = value ^ (value >> 12);
     x = x ^ (x << 25);
@@ -52,10 +28,7 @@ export module NumberUtils {
   export const round = (n: number, precision: number): number =>
     Math.round(n * precision) / precision;
   export const tens = (n: number): number => Math.ceil(n / 10) - 1;
-  export const finales = (n: number): number => {
-    const str = n.toString();
-    return parseInt(str[str.length - 1], 10);
-  };
+  export const finales = (n: number): number => Math.abs(n) % 10;
 
   export function inRange(n: number, min: number, max: number) {
     return n >= Math.min(min, max) && n <= Math.max(min, max);
