@@ -5,11 +5,11 @@ export module Segment {
   import Point2 = Point.Point2;
   import angleTo = Point.angleTo;
   import angleFrom = Point.angleFrom;
-  export type Segment2 = { s1: Point2; s2: Point2 };
+  export type Segment2 = { p1: Point2; p2: Point2 };
 
   export function wedge({
-    s1: { x: p1x, y: p1y },
-    s2: { x: p2x, y: p2y },
+    p1: { x: p1x, y: p1y },
+    p2: { x: p2x, y: p2y },
   }: Segment2): number {
     return p1x * p2y - p1y * p2x;
   }
@@ -24,8 +24,8 @@ export module Segment {
   }
 
   export function toPoint({
-    s1: { x: p1x, y: p1y },
-    s2: { x: p2x, y: p2y },
+    p1: { x: p1x, y: p1y },
+    p2: { x: p2x, y: p2y },
   }: Segment2): Point2 {
     return { x: p2x - p1x, y: p2y - p1y };
   }
@@ -38,36 +38,36 @@ export module Segment {
     const len = length(segment);
     const dx = Math.cos(angle) * len;
     const dy = Math.sin(angle) * len;
-    const { s1: p1, s2: p2 } = segment;
+    const { p1: p1, p2: p2 } = segment;
     const { x: p1x, y: p1y } = p1;
     const { x: p2x, y: p2y } = p2;
     return {
-      s1: backward ? p1 : { x: p1x + dx, y: p1y + dy },
-      s2: backward ? { x: p2x + dx, y: p2y + dy } : p2,
+      p1: backward ? p1 : { x: p1x + dx, y: p1y + dy },
+      p2: backward ? { x: p2x + dx, y: p2y + dy } : p2,
     };
   }
 
   export function center({
-    s1: { x: p1x, y: p1y },
-    s2: { x: p2x, y: p2y },
+    p1: { x: p1x, y: p1y },
+    p2: { x: p2x, y: p2y },
   }: Segment2): Point2 {
     return { x: (p1x + p2x) / 2, y: (p1y + p2y) / 2 };
   }
 
-  export function length({ s1: p1, s2: p2 }: Segment2): number {
+  export function length({ p1, p2 }: Segment2): number {
     return Distance.pointToPoint(p1, p2);
   }
 
-  export function forwardAngle({ s1: p1, s2: p2 }: Segment2): number {
+  export function forwardAngle({ p1, p2 }: Segment2): number {
     return angleTo(p1, p2);
   }
 
-  export function backwardAngle({ s1: p1, s2: p2 }: Segment2): number {
+  export function backwardAngle({ p1, p2 }: Segment2): number {
     return angleFrom(p1, p2);
   }
 
   export function interpolation(
-    { s1: { x: p1x, y: p1y }, s2: { x: p2x, y: p2y } }: Segment2,
+    { p1: { x: p1x, y: p1y }, p2: { x: p2x, y: p2y } }: Segment2,
     t: number
   ): Point2 {
     return { x: t * p2x + (1 - t) * p1x, y: t * p2y + (1 - t) * p1y };

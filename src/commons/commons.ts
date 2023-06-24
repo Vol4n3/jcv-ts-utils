@@ -44,3 +44,8 @@ export function loadImage(url: string): Promise<HTMLImageElement> {
     img.src = url;
   });
 }
+
+export type Labeled<T> = {
+  label: string;
+  value: T;
+};

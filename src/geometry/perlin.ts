@@ -1,6 +1,11 @@
 // from https://github.com/jackunion/tooloud
 import { NumberUtils } from "../commons";
-
+function xorshift(value: number): number {
+  let x = value ^ (value >> 12);
+  x = x ^ (x << 25);
+  x = x ^ (x >> 27);
+  return x * 2;
+}
 const PERMUTATION = [
   151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140,
   36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234,
@@ -24,7 +29,7 @@ const P = [...PERMUTATION, ...PERMUTATION];
 
 export class Perlin {
   constructor(seed = Math.floor(Math.random() * 10000)) {
-    this._seedValue = NumberUtils.xorshift(seed);
+    this._seedValue = xorshift(seed);
 
     this.noise = this.noise.bind(this);
     this.setSeed = this.setSeed.bind(this);
@@ -99,6 +104,6 @@ export class Perlin {
   }
 
   setSeed(seed = 3000): void {
-    this._seedValue = NumberUtils.xorshift(seed);
+    this._seedValue = xorshift(seed);
   }
 }

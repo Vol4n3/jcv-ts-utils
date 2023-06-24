@@ -6,7 +6,7 @@ export module ObjectUtils {
   ): T => {
     return { ...current, [key]: value };
   };
-  export const removeItem = <T, U extends keyof T>(
+  export const removeItemById = <T, U extends keyof T>(
     current: T,
     key: U
   ): Omit<T, U> => {

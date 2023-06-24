@@ -1,10 +1,4 @@
 export module NumberUtils {
-  export function xorshift(value: number): number {
-    let x = value ^ (value >> 12);
-    x = x ^ (x << 25);
-    x = x ^ (x >> 27);
-    return x * 2;
-  }
   export function lerp(t: number, a: number, b: number): number {
     return a + t * (b - a);
   }

@@ -68,10 +68,7 @@ export module Intersection {
     );
   }
 
-  export function pointToSegment(
-    point: Point2,
-    { s1: p1, s2: p2 }: Segment2
-  ): boolean {
+  export function pointToSegment(point: Point2, { p1, p2 }: Segment2): boolean {
     const d1 = Distance.pointToPoint(point, p1);
     const d2 = Distance.pointToPoint(point, p2);
     const segmentLen = Distance.pointToPoint(p1, p2);
@@ -86,8 +83,8 @@ export module Intersection {
     segmentB: Segment2,
     projection?: boolean
   ): Point2 | null {
-    const { s1: sAP1, s2: sAP2 } = segmentA;
-    const { s1: sBP1, s2: sBP2 } = segmentB;
+    const { p1: sAP1, p2: sAP2 } = segmentA;
+    const { p1: sBP1, p2: sBP2 } = segmentB;
     const collisionPoint = segmentToLine(segmentA, segmentB);
     if (collisionPoint === null) {
       return null;
@@ -115,8 +112,8 @@ export module Intersection {
   }
 
   export function segmentToLine(
-    { s1: { x: sP1x, y: sP1y }, s2: { x: sP2x, y: sP2y } }: Segment2,
-    { s1: { x: lP1x, y: lP1y }, s2: { x: lP2x, y: lP2y } }: Segment2
+    { p1: { x: sP1x, y: sP1y }, p2: { x: sP2x, y: sP2y } }: Segment2,
+    { p1: { x: lP1x, y: lP1y }, p2: { x: lP2x, y: lP2y } }: Segment2
   ): Point2 | null {
     const A1 = sP2y - sP1y;
     const B1 = sP1x - sP2x;
@@ -134,13 +131,10 @@ export module Intersection {
     };
   }
 
-  export function pointToLine(
-    point: Point2,
-    { s1: sp1, s2: sp2 }: Segment2
-  ): Point2 {
-    const len = Distance.pointToPoint(sp1, sp2);
-    const { x: sP1x, y: sP1y } = sp1;
-    const { x: sP2x, y: sP2y } = sp2;
+  export function pointToLine(point: Point2, { p1, p2 }: Segment2): Point2 {
+    const len = Distance.pointToPoint(p1, p2);
+    const { x: sP1x, y: sP1y } = p1;
+    const { x: sP2x, y: sP2y } = p2;
     const { x: px, y: py } = point;
 
     const dot =
@@ -154,7 +148,7 @@ export module Intersection {
     segment: Segment2
   ): Point2 | null {
     const cp = { x: cx, y: cy };
-    const { s1: p1, s2: p2 } = segment;
+    const { p1, p2 } = segment;
     const { x: p1x, y: p1y } = p1;
     const { x: p2x, y: p2y } = p2;
     const side1 = Distance.pointToPoint(p1, cp);

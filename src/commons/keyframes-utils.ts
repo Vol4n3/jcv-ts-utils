@@ -36,124 +36,7 @@ const slideOutFrom: (x?: string, y?: string) => Keyframe[] = (
     },
   ];
 };
-const slideInFromRight: Keyframe[] = [
-  {
-    opacity: 0,
-    transform: "translate3d(50%,0,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 1,
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-];
-const slideInFromLeft: Keyframe[] = [
-  {
-    opacity: 0,
-    transform: "translate3d(-50%,0,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 1,
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-];
-const slideInFromTop: Keyframe[] = [
-  {
-    opacity: 0,
-    pointerEvents: "none",
-    transform: "translate3d(0,-50%,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 1,
-    pointerEvents: "none",
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-];
-const slideInFromBottom: Keyframe[] = [
-  {
-    opacity: 0,
-    pointerEvents: "none",
-    transform: "translate3d(0,50%,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 1,
-    pointerEvents: "none",
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-];
-const slideOutToRight: Keyframe[] = [
-  {
-    opacity: 1,
-    pointerEvents: "none",
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 0,
-    pointerEvents: "none",
-    transform: "translate3d(50%,0,0)",
-    transformOrigin: "top",
-  },
-];
-const slideOutToLeft: Keyframe[] = [
-  {
-    opacity: 1,
-    pointerEvents: "none",
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 0,
-    pointerEvents: "none",
-    transform: "translate3d(-50%,0,0)",
-    transformOrigin: "top",
-  },
-];
-const slideOutToTop: Keyframe[] = [
-  {
-    opacity: 1,
-    pointerEvents: "none",
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 0,
-    pointerEvents: "none",
-    transform: "translate3d(0,-50%,0)",
-    transformOrigin: "top",
-  },
-];
-const slideOutToBottom: Keyframe[] = [
-  {
-    opacity: 1,
-    pointerEvents: "none",
-    transform: "translate3d(0,0,0)",
-    transformOrigin: "top",
-  },
-  {
-    opacity: 0,
-    pointerEvents: "none",
-    transform: "translate3d(0,50%,0)",
-    transformOrigin: "top",
-  },
-];
-const growInToRight: Keyframe[] = [
-  {
-    transform: "scale(0,1)",
-    transformOrigin: "left",
-  },
-  {
-    transform: "scale(1,1)",
-    transformOrigin: "left",
-  },
-];
+
 const increaseHeight: (maxHeight: string) => Keyframe[] = (
   maxHeight: string
 ) => {
@@ -209,15 +92,6 @@ const decreaseHeight: (maxHeight: string) => Keyframe[] = (
 export const KeyframesUtils = {
   fadeIn,
   fadeOut,
-  slideInFromRight,
-  slideInFromLeft,
-  slideInFromTop,
-  slideInFromBottom,
-  slideOutToRight,
-  slideOutToLeft,
-  slideOutToTop,
-  slideOutToBottom,
-  growInToRight,
   increaseWidth,
   increaseHeight,
   decreaseHeight,

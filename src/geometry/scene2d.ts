@@ -17,7 +17,16 @@ type addEasingProps = {
   time?: number;
   easing?: EasingFunction;
 };
-
+interface Scene2DOptions {
+  /**
+   * image per seconde
+   */
+  fps?: number;
+  /**
+   * Time in ms
+   */
+  loopUpdateTime?: number;
+}
 export interface Item2Scene {
   isUpdated: boolean;
   onResize?: (canvasWidth: number, canvasHeight: number) => void;
@@ -67,9 +76,8 @@ export class Scene2d {
     onEnd: () => void;
   }[] = [];
   private updateListeners: SceneCallBack[] = [];
-
-  constructor(private container: HTMLElement, fps: number = 60) {
-    this.fpsInterval = 1000 / fps;
+  constructor(private container: HTMLElement, { fps }: Scene2DOptions = {}) {
+    this.fpsInterval = 1000 / (fps || 60);
     this.then = window.performance.now();
     this.container.style.position = "relative";
     this.canvas = document.createElement("canvas");
